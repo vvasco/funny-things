@@ -1,0 +1,50 @@
+<application>
+   <name>Incipit Scripting</name>
+   
+    <!-- Movements -->
+    <module>
+        <name>ctpService</name>
+        <parameters>--robot icub --part left_arm</parameters>
+        <node>icub22</node>
+    </module>
+    <module>
+        <name>ctpService</name>
+        <parameters>--robot icub --part right_arm</parameters>
+        <node>icub22</node>
+    </module>
+    <module>
+        <name>ctpService</name>
+        <parameters>--robot icub --part torso</parameters>
+        <node>icub22</node>
+    </module>
+    <module>
+        <name>ctpService</name>
+        <parameters>--robot icub --part head</parameters>
+        <node>icub22</node>
+    </module>
+
+    <!-- Speakers -->
+    <module>
+        <name>yarpdev</name>
+        <parameters>--device speech --lingware-context speech --robot icub --default-language it-IT --pitch 90 --speed 100</parameters>
+        <node>icub21</node>
+    </module>    
+    <module>
+        <name>iSpeak</name>
+        <parameters>--package speech-dev</parameters>
+        <node>icub21</node>
+    </module>  
+
+    <!-- Connections -->
+    <connection>
+       <from>/iSpeak/speech-dev/rpc</from>
+       <to>/icub/speech:rpc</to>
+       <protocol>tcp</protocol>
+    </connection>
+    <connection>
+        <from>/iSpeak/emotions:o</from>
+        <to>/icub/face/emotions/in</to>
+        <protocol>tcp</protocol>
+    </connection>
+
+</application>
